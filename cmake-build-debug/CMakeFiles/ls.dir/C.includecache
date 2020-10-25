@@ -1,0 +1,18 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/rpoetess/CLionProjects/ls/ls.h
+
+/Users/rpoetess/CLionProjects/ls/main.c
+stdio.h
+-
+dirent.h
+-
+ls.h
+/Users/rpoetess/CLionProjects/ls/ls.h
+
