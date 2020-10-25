@@ -1,0 +1,10 @@
+.DS_Store
+.idea
+*.dSYM
+cmake-build-debug
+*.o
+*.out
+*.a
+*.exe
+*/.DS_Store
+*.gch
