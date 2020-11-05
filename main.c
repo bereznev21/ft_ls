@@ -1,7 +1,10 @@
 #include <stdio.h>
 #include <dirent.h>
 #include "ls.h"
+#include <stdlib.h>
+#include <unistd.h>
 
+#include <string.h>
 
 void flag_l() {struct dirent *readdir(DIR *dir);
 
@@ -75,11 +78,11 @@ void get_flags(int argc, char **argv, t_flags* flags) {
 
 void print_flags(t_flags flags) {
     printf("l R a r t\n");
-    printf("%c ", flags.flag_l);
-    printf("%c ", flags.flag_R);
-    printf("%c ", flags.flag_a);
-    printf("%c ", flags.flag_r);
-    printf("%c\n", flags.flag_t);
+    printf("%d ", flags.flag_l);
+    printf("%d ", flags.flag_R);
+    printf("%d ", flags.flag_a);
+    printf("%d ", flags.flag_r);
+    printf("%d\n", flags.flag_t);
 }
 
 void run_program(t_flags flags) {
@@ -95,21 +98,38 @@ void run_program(t_flags flags) {
         flag_t();
 }
 
-int main(int argc, char **argv) {
+void get_paths(int argc, char **argv, t_paths *paths) {
+    int     i;
+    paths = (t_paths*)malloc(sizeof(t_paths));
+    t_paths *head = paths;
 
+    i = 2;
+    if (argc > 2) {
+        while (i < argc) {
+            paths = (t_paths*)malloc(sizeof(t_paths));
+            paths->name = malloc(sizeof(char*));
+            paths->name = argv[argc - 1];
+            paths = paths->next;
+            i++;
+        }
+        paths = head;
+    }
+}
+
+int main(int argc, char **argv) {
     t_flags flags;
+    t_paths paths;
+
     if (argc == 1)
         flag_no();
-    if (argc == 2) {
-        if (argv[1][1] == '\0')
-            printf("%s: -: No such file or directory\n", argv[0]);
-        else {
-            get_flags(argc, argv, &flags);
-            printf("%s\n", argv[1]);
-        }
+    else {
+        get_flags(argc, argv, &flags);
+        get_paths(argc, argv, &paths);
+        printf("%s\n", argv[1]);
         if (FLAG_DEBUG && argv[1][1] != '\0')
             print_flags(flags);
         run_program(flags);
+        puts(paths.name);
     }
     return 0;
 }

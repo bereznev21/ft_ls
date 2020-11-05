@@ -14,5 +14,9 @@ typedef struct s_flags {
     char flag_t;
 } t_flags;
 
+typedef struct s_paths {
+    char            *name;
+    struct s_paths  *next;
+} t_paths;
 
 #endif //LS_LS_H
