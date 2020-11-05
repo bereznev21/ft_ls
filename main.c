@@ -1,62 +1,5 @@
-#include <stdio.h>
-#include <dirent.h>
 #include "ls.h"
-#include <stdlib.h>
-#include <unistd.h>
-
-#include <string.h>
-
-void flag_l() {struct dirent *readdir(DIR *dir);
-
-    printf("flag l\n");
-}
-
-
-void flag_R() {
-    printf("flag R\n");
-}
-
-
-void flag_a() {
-    printf("flag a\n");
-}
-
-
-void flag_r() {
-    //printf("flag r\n");
-    DIR *dir;
-    struct dirent *entry;
-    if ((dir = opendir(".")) == NULL)
-        perror("opendir() error");
-    else {
-        puts("contents of root:");
-        while ((entry = readdir(dir)) != NULL) {
-            printf("%s  %hu  %hhu  %llu  %hu  %llu\n", entry->d_name, entry->d_namlen, entry->d_type, entry->d_ino, entry->d_reclen, entry->d_seekoff);
-        }
-        closedir(dir);
-    }
-}
-
-
-void flag_t() {
-    printf("flag t\n");
-}
-
-
-void flag_no() {
-    DIR *dir;
-    struct dirent *entry;
-    if ((dir = opendir(".")) == NULL)
-        perror("opendir() error");
-    else {
-        puts("contents of root:");
-        while ((entry = readdir(dir)) != NULL) {
-            if (entry->d_name[0] != '.')
-                printf("%s", entry->d_name);
-        }
-        closedir(dir);
-    }
-}
+#include "flags.c"
 
 void get_flags(int argc, char **argv, t_flags* flags) {
     int i;
@@ -113,6 +56,7 @@ void get_paths(int argc, char **argv, t_paths *paths) {
             i++;
         }
         paths = head;
+        puts(paths->name);
     }
 }
 
@@ -129,7 +73,6 @@ int main(int argc, char **argv) {
         if (FLAG_DEBUG && argv[1][1] != '\0')
             print_flags(flags);
         run_program(flags);
-        puts(paths.name);
     }
     return 0;
 }

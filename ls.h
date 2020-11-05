@@ -1,6 +1,12 @@
 //
 // Created by Redwyn Poetess on 10/25/20.
 //
+#include <stdio.h>
+#include <dirent.h>
+#include <stdlib.h>
+#include <unistd.h>
+
+#include <string.h>
 
 #ifndef LS_LS_H
 #define LS_LS_H
