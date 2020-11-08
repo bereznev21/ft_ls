@@ -26,7 +26,7 @@ void print_flags(t_flags flags) {
     printf("%d\n", flags.flag_t);
 }
 
-void run_program(t_flags flags) {
+void run_flags(t_flags flags) {
     if (flags.flag_l)
         flag_l();
     if (flags.flag_R)
@@ -70,7 +70,7 @@ int main(int argc, char **argv) {
         printf("%s\n", argv[1]);
         if (FLAG_DEBUG && argv[1][1] != '\0')
             print_flags(flags);
-        run_program(flags);
+        run_flags(flags);
     }
     return 0;
 }
