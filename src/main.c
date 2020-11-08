@@ -1,8 +1,11 @@
 #include "ls.h"
 
 void get_flags(char **argv, t_flags* flags) {
-    int i;
-    i = 0;
+	int i;
+
+	i = 0;
+	if (argv[1][0] != '-')
+		return;
     while (argv[1][++i] != '\0') {
         if (argv[1][i] == 'l')
             flags->flag_l = 1;
@@ -50,6 +53,7 @@ void get_paths(int argc, char **argv, t_paths *paths) {
             paths = (t_paths*)malloc(sizeof(t_paths));
             paths->name = malloc(sizeof(char*));
             paths->name = argv[argc - 1];
+            printf("%s ", paths->name);
             paths = paths->next;
             i++;
         }
@@ -59,13 +63,13 @@ void get_paths(int argc, char **argv, t_paths *paths) {
 }
 
 int main(int argc, char **argv) {
-    t_flags flags;
+    t_flags flags = {'-', '-', '-', '-', '-'};
     t_paths paths;
 
     if (argc == 1)
         flag_no();
     else {
-        get_flags(argv, &flags);
+		get_flags(argv, &flags);
         get_paths(argc, argv, &paths);
         printf("%s\n", argv[1]);
         if (FLAG_DEBUG && argv[1][1] != '\0')
