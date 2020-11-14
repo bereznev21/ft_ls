@@ -42,36 +42,52 @@ void run_flags(t_flags flags) {
         flag_t();
 }
 
-void get_paths(int argc, char **argv, t_paths *paths) {
-    int     i;
+t_paths *get_paths(int argc, char **argv) {
+/*
+    int     argc_index;
     paths = (t_paths*)malloc(sizeof(t_paths));
     t_paths *head = paths;
 
-    i = 2;
+    argc_index = 2;
     if (argc > 2) {
-        while (i < argc) {
+        while (argc_index < argc) {
             paths = (t_paths*)malloc(sizeof(t_paths));
             paths->name = malloc(sizeof(char*));
             paths->name = argv[argc - 1];
             printf("%s ", paths->name);
             paths = paths->next;
-            i++;
+		argc_index++;
         }
         paths = head;
         puts(paths->name);
     }
+*/
+	t_paths *new_path;
+	int i;
+	(void) argc;
+	i = argc - 1;
+
+	if ((new_path = (t_paths *)malloc(sizeof(*new_path))) == NULL)
+		return (NULL);
+	if((new_path->name) == malloc(ft_strlen(argv[i]))) {
+		free(new_path);
+		return (NULL);
+	}
+	ft_memcpy(new_path->name, argv[i], ft_strlen(argv[i]));
+	new_path->next = NULL;
+	return new_path;
 }
 
 int main(int argc, char **argv) {
     t_flags flags = {'-', '-', '-', '-', '-'};
-    t_paths paths;
+    t_paths *paths;
 
     if (argc == 1)
         flag_no();
     else {
 		get_flags(argv, &flags);
-        get_paths(argc, argv, &paths);
-        printf("%s\n", argv[1]);
+        paths = get_paths(argc, argv);
+        //printf("%s\n", argv[1]);
         if (FLAG_DEBUG && argv[1][1] != '\0')
             print_flags(flags);
         run_flags(flags);

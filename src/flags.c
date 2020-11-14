@@ -27,6 +27,8 @@ void flag_r() {
         puts("contents of root:");
         while ((entry = readdir(dir)) != NULL) {
             printf("%s  %hu  %hhu  %llu  %hu  %llu\n", entry->d_name, entry->d_namlen, entry->d_type, entry->d_ino, entry->d_reclen, entry->d_seekoff);
+        	//ft_putstr(entry->d_name);
+        	//ft_putstr("\n");
         }
         closedir(dir);
     }
@@ -41,13 +43,22 @@ void flag_t() {
 void flag_no() {
     DIR *dir;
     struct dirent *entry;
+    int i;
+
+    i = 0;
     if ((dir = opendir(".")) == NULL)
         perror("opendir() error");
     else {
-        puts("contents of root:");
+        //puts("contents of root:");
         while ((entry = readdir(dir)) != NULL) {
-            if (entry->d_name[0] != '.')
-                printf("%s", entry->d_name);
+            if (entry->d_name[0] != '.') {
+				i++;
+				ft_putstr(entry->d_name);
+				if (i % 4 == 0)
+					ft_putstr("\n");
+				else
+					ft_putstr("\t\t");
+            }
         }
         closedir(dir);
     }
