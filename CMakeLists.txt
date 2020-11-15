@@ -75,4 +75,5 @@ add_executable(ls
         libft/src/ft_toupper.c
         src/flags.c
         src/main.c
+        src/debug_func.c
         ls.h)

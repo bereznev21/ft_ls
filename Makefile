@@ -5,7 +5,8 @@ OPTIONS = -I. -Ilibft/includes
 
 SRC = \
 		src/main.c \
-		src/flags.c
+		src/flags.c \
+		src/debug_func.c
 
 FLS = -g -Wall -Wextra -Werror
 

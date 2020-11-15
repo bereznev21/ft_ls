@@ -2,7 +2,7 @@
 
 
 void flag_l() {
-    struct dirent *readdir(DIR *dir);
+    //struct dirent *readdir(DIR *dir);
     printf("flag l\n");
 }
 

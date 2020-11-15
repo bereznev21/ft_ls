@@ -33,5 +33,8 @@ void flag_a();
 void flag_r();
 void flag_t();
 void flag_no();
+void print_paths(t_paths *paths);
+void print_flags(t_flags flags);
+
 
 #endif //LS_LS_H
